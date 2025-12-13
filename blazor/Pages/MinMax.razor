@@ -1,6 +1,6 @@
-@page "/min-max"
+@page "/min-max-sum-product"
 
-<PageTitle>Minimum and Maximum</PageTitle>
+<PageTitle>Minimumm Maximum, Sum and Product</PageTitle>
 <h1 class="display-4">Minimum and Maximum</h1>
 
 <div class="container border">
@@ -30,8 +30,8 @@
             <td style="text-align:center" colspan="2">
                 <button class="mx-1" @onclick="Minimum">Min</button>
                 <button class="mx-1" @onclick="Maximum">Max</button>
-                <button class="mx-1 "@onclick="Sum">Sum</button>
-                <button class="mx-1 "@onclick="Product">Product</button>
+                <button class="mx-1 " @onclick="Sum">Sum</button>
+                <button class="mx-1 " @onclick="Product">Product</button>
             </td>
         </tr>
         <tr>
@@ -52,15 +52,32 @@
 
     void Minimum()
     {
-
+        result = x;
+        if (y < result)
+            result = y;
+        if (z < result)
+            result = z;
+        if (t < result)
+            result = t;
+        if (w < result)
+            result = w;
     }
     void Maximum()
     {
-    
+        result = y;
+        if (x > result)
+            result = x;
+        if (z > result)
+            result = z;
+        if (t > result)
+            result = t;
+        if (w > result)
+            result = w;
     }
+
     void Sum()
     {
-        result = x + y + z + w+ t;
+        result = x + y + z + w + t;
     }
     void Product()
     {
