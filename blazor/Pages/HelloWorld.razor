@@ -1,0 +1,41 @@
+@page "/hello-world"
+
+<PageTitle>Sequence</PageTitle>
+<h1 class="display-3">Sequence</h1>
+
+<div>
+<!-- buttons for working with the text -->>
+<div clas="row">
+
+    <button class="btn btn-primary mx-2 my-2" @onclick="Execute">Expand</button>
+    <button class="btn btn-danger mx-2 my-2" @onclick="ClearAll">Clear</button>
+    <!--
+      <button class="btn btn-warning mx-2 my-2" @onclick="ClearSome">Clear Some</button>
+      -->
+    </div>
+</div>
+
+<div clas="row">
+    Output:
+    <pre class="p-3 bg-light border rounded" @message></pre>
+
+</div>
+
+@code {
+    private string message = "";
+    /*
+    string something = "AAAA"
+    */
+    private void ClearAll()
+    {
+        // clear the message
+        message = "";
+    }
+     private void Execute()
+     {
+        message = message + "Hello world!!!" + Environment.NewLine;
+        message += message + "Hello World, again!" + Environment.NewLine;
+        message += message + "Hello World, once again!" + Environment.NewLine;
+        message = message + "Goodbye." + Environment.NewLine;
+    }
+}

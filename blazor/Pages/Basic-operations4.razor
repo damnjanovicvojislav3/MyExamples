@@ -1,0 +1,74 @@
+@page "/basic-operations-4"
+
+<PageTitle>Basic operations</PageTitle>
+
+
+
+<h1 class="display-1">Basic operations</h1>
+
+<div class="row">
+    <div class="column">
+        <label for="argument1">First one:</label>
+        <input type="text" class="form-control" id="argument1" placeholder="Enter first argument" @bind="arg1">
+    </div>
+</div>
+<div class="column">
+    <label for="argument2">Second one:</label>
+    <input type="text" class="form-control" id="argument2" placeholder="Enter second argument" @bind="arg2">
+</div>
+<div clas="row">
+    <div class="mb-3">
+        <label for="operation" class="form-label">Select Operation</label>
+        <select id="op" class="form-select" @bind="operation">
+            <option value="add">Addition (+)</option>
+            <option value="subtract">Subtraction (-)</option>
+            <option value="multiply">Multiplication (*)</option>
+            <option value="divide">Division (/)</option>
+            <option value="power">Power to (**)</option>
+        </select>
+    </div>
+    <div class=" d-flex justify-content-center">
+        <button class="btn btn-primary mx-2 my-2" @onclick="DoTheOperation">Execute!</button>
+    </div>
+</div>
+<div class="row">
+    <div class="column">
+        <label for="result">Result:</label>
+        <input type="text" class="form-control" id="result" placeholder="Result" @bind="result">
+    </div>
+</div>
+
+@code
+{
+    double arg1;
+    double arg2;
+    double result;
+    string operation = "add";
+    void DoTheOperation()
+    {
+        Console.WriteLine("I am alive!");
+        Console.WriteLine(operation);
+        switch (operation)
+        {
+            case "add":
+                result = arg1 + arg2;
+                break;
+            case "subtract":
+                result = arg1 - arg2;
+                break;
+            case "multiply":
+                result = arg1 * arg2;
+                break;
+            case "divide":
+                result = arg1 / arg2;
+                break;
+            case "power":
+                result = Math.Pow(arg1, arg2);
+                break;
+            default:
+                Console.WriteLine("Error: Incorect Operator!");
+                result = double.NaN;
+                break;
+        }
+    }
+}
