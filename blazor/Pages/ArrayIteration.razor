@@ -1,0 +1,72 @@
+﻿@page "/array-iteration"
+
+<PageTitle>Arrays - iteration</PageTitle>
+<h1 class="display-3">Arrays - iteration</h1>
+<div class="row my-1">
+    <div class ="col">
+        </div>
+</div>
+<button @onclick="Execute">Do It!</button>
+
+Output:
+
+<div style="border:solid; border-color:black">
+  <pre>@message</pre>
+</div>
+
+@code {
+    private string message = "";
+
+    private void Execute()
+    {
+        byte[] bytA = new byte[10];
+        bytA[2] = 45;
+        bytA[7] = 42;
+        message += "byteA: ";
+        for (int i=0; i<bytA.Length; i++)
+        {
+            message += bytA[i] + " ";
+        }
+        message += Environment.NewLine;
+        Console.WriteLine(message);
+        foreach(byte element in bytA)
+        {
+            message += element + "";
+        }
+         message += Environment.NewLine;
+        Console.WriteLine(message);
+
+        String spec = " special";
+        String[] seasons = { " spring", " autumn", spec + " winter", " summer" };
+        message += "seasons: ";
+        foreach (var s in seasons)
+        {
+            message += "'" + s + "'";
+        }
+        message += Environment.NewLine;
+        Console.WriteLine(message);
+
+        int[] arr = { 24, 48, 96, 192, 36, 72, 144 };
+        message += "arr: ";
+        foreach (int x in arr)
+        {
+            message += x + " ";
+        }
+        message += Environment.NewLine;
+        Console.WriteLine(message);
+
+        string[] strA = new string[40];
+        strA[2] = "mickey";
+        strA[3] = "mouse";
+        strA[4] = "donald";
+        strA[5] = "duck";
+        strA[6] = "goofy";
+        message += "strA: ";
+        foreach (string s in strA)
+        {
+            message += "'" + s + "' ";
+        }
+        message += Environment.NewLine;
+        Console.WriteLine(message);
+    }
+}

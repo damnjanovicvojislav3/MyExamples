@@ -1,0 +1,38 @@
+@page "/factoriel-functions"
+
+<PageTitle>Factoriel</PageTitle>
+<h1 class="display-2">Factoriel</h1>
+
+<div class="row my-1">
+    <div class="col">
+        <input type="number" class="form control" @bind="n">
+    </div>
+    <div class="col>" <button class="btn btn-primary" @onclick="FactorielF1">Factoriel</button>
+    </div>
+    <div class="col">
+        Result:
+    </div>
+    <div class="col">
+        <b> @result </b>
+    </div>
+</div>
+
+@code
+{
+    uint n = 1;
+    ulong result = 1;
+
+    void FactorielF1()
+    {
+        Console.WriteLine(n);
+        result = CalculateFactoriel(n);
+        Console.WriteLine(result);
+    }
+    ulong CalculateFactoriel(uint nn)
+    {
+        ulong ret = 1;
+        for(uint counter = 1; counter <= nn; counter ++)
+            ret *= counter;
+        return ret;
+    }
+}

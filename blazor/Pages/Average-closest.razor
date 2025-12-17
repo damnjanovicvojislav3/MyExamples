@@ -1,0 +1,106 @@
+@page "/averageclosest-functions"
+@using System
+
+<PageTitle>Average Functions</PageTitle>
+<h1 class="display-4">Average and closest number</h1>
+
+<div class="row my-3">
+    <div class="col">
+        <input type="number" class="form-control" @bind="numbers[0]" />
+    </div>
+    <div class="col">
+        <input type="number" class="form-control" @bind="numbers[1]" />
+    </div>
+    <div class="col">
+        <input type="number" class="form-control" @bind="numbers[2]" />
+    </div>
+    <div class="col">
+        <input type="number" class="form-control" @bind="numbers[3]" />
+    </div>
+    <div class="col">
+        <input type="number" class="form-control" @bind="numbers[4]" />
+    </div>
+</div>
+
+<div class="row my-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="CalculateAverage">Calculate Average</button>
+    </div>
+
+    <div class="col">
+        <button class="btn btn-danger" @onclick="CalculateClosest">Closest to Average</button>
+    </div>
+</div>
+
+<div class="row my-3">
+    <div class="col">
+        <b>Average: </b> @average
+    </div>
+    <div class="col">
+        <b>Closest number: </b> @closest
+    </div>
+</div>
+
+<h2>Double Factorial (!!)</h2>
+
+<div class="row my-3">
+    <div class="col-3">
+        <input type="number" class="form-control" @bind="dfNumber" />
+    </div>
+    <div class="col">
+        <button class="btn btn-success" @onclick="CalculateDoubleFactorial">Calculate !!</button>
+    </div>
+    <div class="col">
+        <b>Result: </b> @doubleFactorial
+    </div>
+</div>
+
+@code {
+    double[] numbers = new double[5];
+
+    double average = 0;
+    double closest = 0;
+
+    int dfNumber = 1;
+    ulong doubleFactorial = 1;
+
+    void CalculateAverage()
+    {
+        double sum = 0;
+
+        foreach (var n in numbers)
+
+            sum += n;
+
+        average = sum / numbers.Length;
+    }
+
+    void CalculateClosest()
+    {
+        CalculateAverage();
+
+        closest = numbers[0];
+
+        double minDiff = Math.Abs(numbers[0] - average);
+
+        foreach (var n in numbers)
+
+        {
+            double diff = Math.Abs(n - average);
+            if (diff < minDiff)
+            {
+                minDiff = diff;
+                closest = n;
+            }
+        }
+    }
+    
+
+    void CalculateDoubleFactorial()
+    {
+        doubleFactorial = 1;
+
+        for (int i = dfNumber; i > 0; i -= 2)
+            doubleFactorial *= (ulong)i;
+    }
+}
