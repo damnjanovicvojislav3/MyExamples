@@ -30,6 +30,9 @@
     <div class="col">
         <button class="btn btn-danger" @onclick="CalculateClosest">Closest to Average</button>
     </div>
+    <div class="col">
+        <button class="btn btn-warning" @onclick="CalculateFarthest">Farthest from Average</button>
+    </div>
 </div>
 
 <div class="row my-3">
@@ -38,6 +41,8 @@
     </div>
     <div class="col">
         <b>Closest number: </b> @closest
+    </div>
+    <div class="col" <b>Farthest: </b> @farthest
     </div>
 </div>
 
@@ -60,7 +65,7 @@
 
     double average = 0;
     double closest = 0;
-
+    double farthest = 0;
     int dfNumber = 1;
     ulong doubleFactorial = 1;
 
@@ -73,6 +78,26 @@
             sum += n;
 
         average = sum / numbers.Length;
+    }
+
+    void CalculateFarthest()
+    {
+        CalculateAverage();
+
+        farthest = numbers[0];
+
+        double maxDiff = Math.Abs(numbers[0] - average);
+
+        foreach (var n in numbers)
+
+        {
+            double diff = Math.Abs(n - average);
+            if (diff > maxDiff)
+            {
+                maxDiff = diff;
+                farthest = n;
+            }
+        }
     }
 
     void CalculateClosest()
@@ -94,7 +119,7 @@
             }
         }
     }
-    
+
 
     void CalculateDoubleFactorial()
     {

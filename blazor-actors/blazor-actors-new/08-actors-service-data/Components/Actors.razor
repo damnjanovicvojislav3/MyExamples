@@ -1,0 +1,39 @@
+@inject IActorService _actorService 
+
+@if (_actors == null)
+{
+    <p><em>Loading actors...</em></p>
+}
+else
+{
+    <h2>My favorite actors</h2>
+    <ul class="heroes">
+        @foreach (Actor a in _actors)
+        {
+            <li @onclick="@(()=>OnSelect(a))" 
+                class="@((a==_selectedActor)?"selected":"")" >
+                <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
+                - @a.DateOfBirth?.ToShortDateString() ( @a.CountryCode )
+            </li>
+        }
+    </ul>
+}
+<ActorDetail SelectedActor=@_selectedActor></ActorDetail>
+
+@code
+{
+    Actor _selectedActor = null;
+
+    private List<Actor> _actors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _actors = await _actorService.GetActorsAsync();
+    }
+
+    private void OnSelect(Actor actor)
+    {
+        this._selectedActor = actor;
+    }
+
+}

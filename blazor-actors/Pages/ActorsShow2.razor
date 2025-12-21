@@ -1,0 +1,148 @@
+﻿@page "/actors-show2"
+
+@using DSS.Models;
+
+<PageTitle>Actors</PageTitle>
+<h1 class="display-3">Actors</h1>
+
+<table class="table table-bordered">
+    <tbody>
+        <thead class="thead-dark">
+            <tr>
+                <td>First name</td>
+                <td>Last name</td>
+                <td>Day of birth</td>
+                <td>IMDB score</td>
+            </tr>
+        </thead>
+    </tbody>
+
+    @foreach (Actor2 act in filmCrew)
+    {
+        <tr>
+            <td>@act.firstName</td>
+            <td>@act.lastName</td>
+            <td>@act.dayOfBirth</td>
+            <td>@act.imdbMark</td>
+        </tr>
+    }
+</table>
+<div class="row my-1 align-items center">
+    <div class="col-4">
+        <button class="btn btn-primary" @onclick="AverageIMDB">Average IMDB</button>
+    </div>
+
+    @if (showResultA)
+    {
+        <span> AverageIMDB is: @avgIMDB</span>
+    }
+</div>
+
+<div class="row my-1 align-items center">
+    <div class="col-4">
+        <button class="btn btn-warning" @onclick="Youngest">Youngest actor</button>
+    </div>
+
+    @if (showResultY)
+    {
+        <span> Youngest actor is: @youngestActor.firstName @youngestActor.lastName @youngestActor.dayOfBirth</span>
+    }
+</div>
+
+<div class="row my-1 align-items center">
+    <div class="col-4">
+        <button class="btn-success" @onclick="Oldest">Oldest actor</button>
+    </div>
+
+    @if (showResultO)
+    {
+        <span> Oldest actor is: @oldestActor.firstName @oldestActor.lastName @oldestActor.dayOfBirth</span>
+    }
+</div>
+@code {
+    private bool showResultA = false;
+    private bool showResultY = false;
+    private bool showResultO = false;
+
+    private double avgIMDB;
+    private Actor2 youngestActor;
+    private Actor2 oldestActor;
+
+
+    private Actor2 movieStar1 = new Actor2()
+    {
+        firstName = "John",
+        lastName = "Goodman",
+        dayOfBirth = new DateOnly(1952, 6, 20),
+        imdbMark = 9.7
+    };
+
+    private Actor2 movieStar2 = new Actor2()
+    {
+        lastName = "De Niro",
+        imdbMark = 9.4,
+        dayOfBirth = new DateOnly(1943, 8, 17),
+        firstName = "Robert"
+    };
+
+
+    private Actor2 theBadGuy = new Actor2()
+    {
+        dayOfBirth = new DateOnly(1959, 7, 26),
+        lastName = "Spacey",
+        imdbMark = 9.6,
+        firstName = "Kevin"
+    };
+
+    private Actor2 theGoodGuy = new Actor2()
+    {
+        lastName = "Nero",
+        imdbMark = 9.9,
+        firstName = "Franco",
+        dayOfBirth = new DateOnly(1941, 11, 23)
+
+    };
+
+    private Actor2[] filmCrew = new Actor2[4];
+
+    protected override async Task OnInitializedAsync()
+    {
+        filmCrew[0] = movieStar1;
+        filmCrew[1] = movieStar2;
+        filmCrew[2] = theBadGuy;
+        filmCrew[3] = theGoodGuy;
+    }
+
+    private void AverageIMDB()
+    {
+        showResultA = true;
+        double sum = 0;
+        foreach (Actor2 a in filmCrew)
+            sum += a.imdbMark;
+        avgIMDB = sum / filmCrew.Length;
+    }
+    private void Youngest()
+    {
+        showResultY = true;
+        int result = 0;
+        for (int i = 1; i < filmCrew.Length; i++)
+        {
+            if (filmCrew[i].dayOfBirth > filmCrew[result].dayOfBirth)
+                result = i;
+        }
+        youngestActor = filmCrew[result];
+    }
+
+    private void Oldest()
+    {
+        showResultO = true;
+        int result = 0;
+        for (int i = 1; i < filmCrew.Length; i++)
+        {
+            if (filmCrew[i].dayOfBirth < filmCrew[result].dayOfBirth)
+                result = i;
+        }
+        oldestActor = filmCrew[result];
+    }
+
+}

@@ -1,0 +1,58 @@
+@inject HttpClient _httpClient
+
+@if (_actors == null)
+{
+    <p><em>Loading actors...</em></p>
+}
+else
+{
+    <h2>My favorite actors</h2>
+    <ul class="heroes">
+        @foreach (Actor a in _actors)
+        {
+            <li>
+                <span class="badge">@a.Id</span> @a.FirstName &nbsp; @a.LastName
+                - @a.DateOfBirth?.ToString("dd.MM.yyyy") ( @a.CountryCode )
+            </li>
+        }
+    </ul>
+}
+@if (_actor != null)
+{
+<h2>Details for @_actor.FirstName @_actor.LastName.ToUpper()</h2>
+<br />
+<div><span>id: </span>@_actor.Id</div>
+<div><span>first name: </span>@_actor.FirstName</div>
+<div><span>last name: </span>@_actor.LastName</div>
+<div><span>country: </span>@_actor.CountryCode</div>
+<div><span>date of birth: </span> @_actor.DateOfBirth?.ToString("MM/dd/yyyy")</div>
+<br />
+<div>
+    <label> first name: </label>
+    <input @bind="_actor.FirstName" placeholder="FirstName">
+</div>
+<div>
+    <label> last name: </label>
+    <input @bind="_actor.LastName" placeholder="LastName">
+</div>
+<div>
+    <label> country: </label>
+    <input @bind="_actor.CountryCode" placeholder="CountryCode">
+</div>
+<div>
+    <label> date of birth: </label>
+    <input @bind="_actor.DateOfBirth" placeholder="DateOfBirth">
+</div>
+}
+@code
+{
+    private Actor[] _actors;
+    private Actor _actor;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _actors = await _httpClient.GetFromJsonAsync<Actor[]>("sample-data/actors.json");
+        _actor = _actors[0];
+    }
+
+}

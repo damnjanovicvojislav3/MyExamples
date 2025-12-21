@@ -1,0 +1,52 @@
+[
+  {
+    "Id": 1,
+    "FirstName": "Bata",
+    "LastName": "Zivojinovic",
+    "DateOfBirth": "1933-06-05",
+    "CountryCode": "SR"
+  },
+  {
+    "Id": 2,
+    "DateOfBirth": "1967-03-26",
+    "FirstName": "Julia",
+    "LastName": "Roberts",
+    "CountryCode": "US"
+  },
+  {
+    "CountryCode": "US",
+    "Id": 3,
+    "FirstName": "Robert",
+    "LastName": "De Niro",
+    "DateOfBirth": "1943-12-17"
+  },
+  {
+    "Id": 4,
+    "FirstName": "Al",
+    "LastName": "Pacino",
+    "DateOfBirth": "1940-05-25",
+    "CountryCode": "US"
+  },
+  {
+    "Id": 5,
+    "FirstName": "Tom",
+    "LastName": "Cruise",
+    "DateOfBirth": "1962-07-03",
+    "CountryCode": "US"
+  },
+  {
+    "Id": 7,
+    "FirstName": "Franco",
+    "LastName": "Nero",
+    "DateOfBirth": "1952-07-03",
+    "CountryCode": "IT"
+  },
+   
+  {
+    "Id": 8,
+    "FirstName": "Michael",
+    "LastName": "Madsen",
+    "DateOfBirth": "1957-09-25",
+    "CountryCode": "IT"
+  }
+]
