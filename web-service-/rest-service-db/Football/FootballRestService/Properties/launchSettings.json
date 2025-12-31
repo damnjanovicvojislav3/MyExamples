@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ActorsRestService": {
+    "FootballRestService": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
