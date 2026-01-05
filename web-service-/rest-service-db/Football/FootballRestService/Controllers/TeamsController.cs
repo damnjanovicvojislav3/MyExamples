@@ -35,13 +35,13 @@ namespace FootballRestService.Controllers
         {
             _context.Teams.Add(team);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTeam), new { id = team.TeamID }, team);
+            return CreatedAtAction(nameof(GetTeam), new { id = team.TeamId }, team);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTeam(int id, Team team)
         {
-            if (id != team.TeamID) return BadRequest();
+            if (id != team.TeamId) return BadRequest();
 
             _context.Entry(team).State = EntityState.Modified;
 
@@ -71,7 +71,7 @@ namespace FootballRestService.Controllers
 
         private bool TeamExists(int id)
         {
-            return _context.Teams.Any(e => e.TeamID == id);
+            return _context.Teams.Any(e => e.TeamId == id);
         }
     }
 }

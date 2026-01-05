@@ -31,7 +31,7 @@ namespace FootballRestService.Controllers
             var match = await _context.Matches
                                       .Include(m => m.HomeTeam)
                                       .Include(m => m.AwayTeam)
-                                      .FirstOrDefaultAsync(m => m.MatchID == id);
+                                      .FirstOrDefaultAsync(m => m.MatchId == id);
             if (match == null) return NotFound();
             return match;
         }
@@ -41,13 +41,13 @@ namespace FootballRestService.Controllers
         {
             _context.Matches.Add(match);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetMatch), new { id = match.MatchID }, match);
+            return CreatedAtAction(nameof(GetMatch), new { id = match.MatchId }, match);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutMatch(int id, Match match)
         {
-            if (id != match.MatchID) return BadRequest();
+            if (id != match.MatchId) return BadRequest();
 
             _context.Entry(match).State = EntityState.Modified;
 
@@ -77,7 +77,7 @@ namespace FootballRestService.Controllers
 
         private bool MatchExists(int id)
         {
-            return _context.Matches.Any(e => e.MatchID == id);
+            return _context.Matches.Any(e => e.MatchId == id);
         }
     }
 }

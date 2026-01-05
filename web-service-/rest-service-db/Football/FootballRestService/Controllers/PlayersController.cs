@@ -26,7 +26,7 @@ namespace FootballRestService.Controllers
         public async Task<ActionResult<Player>> GetPlayer(int id)
         {
             var player = await _context.Players.Include(p => p.Team)
-                                               .FirstOrDefaultAsync(p => p.PlayerID == id);
+                                               .FirstOrDefaultAsync(p => p.PlayerId == id);
             if (player == null) return NotFound();
             return player;
         }
@@ -36,13 +36,13 @@ namespace FootballRestService.Controllers
         {
             _context.Players.Add(player);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetPlayer), new { id = player.PlayerID }, player);
+            return CreatedAtAction(nameof(GetPlayer), new { id = player.PlayerId }, player);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPlayer(int id, Player player)
         {
-            if (id != player.PlayerID) return BadRequest();
+            if (id != player.PlayerId) return BadRequest();
 
             _context.Entry(player).State = EntityState.Modified;
 
@@ -72,7 +72,7 @@ namespace FootballRestService.Controllers
 
         private bool PlayerExists(int id)
         {
-            return _context.Players.Any(e => e.PlayerID == id);
+            return _context.Players.Any(e => e.PlayerId == id);
         }
     }
 }

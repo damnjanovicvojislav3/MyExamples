@@ -10,9 +10,7 @@ namespace FootballRestService.Models
         [Key]
         [Column("player_id")]
         public int PlayerId { get; set; }
-        // Extra property for Controllers using PlayerID
-        [NotMapped]
-        public int PlayerID => PlayerId;
+        
 
         [Required]
         [Column("name", TypeName = "nvarchar(50)")]

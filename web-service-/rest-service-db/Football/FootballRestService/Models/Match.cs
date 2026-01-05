@@ -10,9 +10,7 @@ namespace FootballRestService.Models
         [Key]
         [Column("match_id")]
         public int MatchId { get; set; }
-        // Extra property to satisfy Controllers using MatchID
-        [NotMapped]
-        public int MatchID => MatchId;
+       
 
         [Column("home_team_id")]
         public int HomeTeamId { get; set; }
